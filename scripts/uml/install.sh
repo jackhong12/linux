@@ -39,6 +39,11 @@ sudo ip address add 192.168.100.100/24 dev tap0
 make ARCH=um SUBARCH=x86_64 modules
 make _modinst_ MODLIB=`pwd`/rootfs/lib/modules/VER ARCH=um
 
+# gdb script
+echo "CONFIG_GDB_SCRIPTS=y" > .config-fragment
+ARCH=um scripts/kconfig/merge_config.sh .config .config-fragment
+make ARCH=um scripts_gdb
+
 # gdbinit
 cp ./scripts/uml/gdbinit ./
 sed -i 's|FULLPATH|'"$PWD"'|' gdbinit
