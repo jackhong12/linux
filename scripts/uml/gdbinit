@@ -1,0 +1,7 @@
+python gdb.COMPLETE_EXPRESSION = gdb.COMPLETE_SYMBOL
+add-auto-load-safe-path scripts/gdb/vmlinux-gdb.py
+file vmlinux
+lx-version
+set args umid=uml0 root=/dev/root rootfstype=hostfs rootflags=FULLPATH/rootfs rw mem=64M init=/init.sh quiet
+handle SIGSEGV nostop noprint
+handle SIGUSR1 nopass stop print

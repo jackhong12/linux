@@ -39,6 +39,10 @@ sudo ip address add 192.168.100.100/24 dev tap0
 make ARCH=um SUBARCH=x86_64 modules
 make _modinst_ MODLIB=`pwd`/rootfs/lib/modules/VER ARCH=um
 
+# gdbinit
+cp ./scripts/uml/gdbinit ./
+sed -i 's|FULLPATH|'"$PWD"'|' gdbinit
+
 # script to run UML
 cp ./scripts/uml/UML.sh ./
 chmod +x UML.sh
