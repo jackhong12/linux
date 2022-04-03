@@ -43,6 +43,16 @@ make _modinst_ MODLIB=`pwd`/rootfs/lib/modules/VER ARCH=um
 cp ./scripts/uml/gdbinit ./
 sed -i 's|FULLPATH|'"$PWD"'|' gdbinit
 
+# kernel modules
+# tests
+make -C tests
+cp tests/hello.ko rootfs/
+# ticks
+pushd tests/ticks
+make
+popd
+cp tests/ticks/ticks.ko rootfs/
+
 # script to run UML
 cp ./scripts/uml/UML.sh ./
 chmod +x UML.sh
