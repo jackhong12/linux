@@ -6,10 +6,6 @@ if [ $? -ne 0 ]; then
     # busybox
     /bin/busybox --install
 
-    # fs
-    mount -t proc none /proc
-    mount -t sysfs sys /sys
-
     # net
     /sbin/ip link set eth0 up
     /sbin/ip address add 192.168.100.101/24 dev eth0
@@ -20,5 +16,9 @@ if [ $? -ne 0 ]; then
 fi
 
 export PS1='\[\033[01;32mUML:\w\033[00m \$ '
+
+# fs
+mount -t proc none /proc
+mount -t sysfs sys /sys
 
 exec /sbin/tini /bin/sh +m
